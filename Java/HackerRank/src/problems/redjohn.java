@@ -16,26 +16,34 @@ public class redjohn{
 		array[4] = 2;
 		for(int i = 5;i<41;i++)
 		{
-			array[i] = (int) (array[i-4] + Math.pow(2,Math.floor((Math.log(i)/Math.log(2)))));
-			System.out.println(i+" "+array[i]);
+			array[i] = array[i-1];
+			if(i-4>0)
+				array[i] += array[i-4];
+			//System.out.println(i + " " + array[i]);
 		}
 		while(t-->0)
 		{
 			int n;
 			n = scanner.nextInt();
 			int num = 0;
+
 			for(int i = 2;i<=array[n];i++)
 			{
-				for(int j = 2;j<i;j++)
-					if(i%j == 0)
-					{
-						num--;
-						break;
-					}
-				num++;
+				if(isprime(i))
+					num++;
 			}
 			System.out.println(num);
 			//System.out.println(array[n]-num);
 		}
+	}
+	
+	public static boolean isprime(long n)
+	{
+		for(int j = 2;j*j<=n;j++)
+			if(n%j == 0)
+			{
+				return false;
+			}
+		return true;
 	}
 }
